@@ -7,6 +7,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
 {
     public class GeoMessage
     {
+        public int Id { get; set; }
         public string message { get; set; }
         public double longitude { get; set; }
         public double latitude { get; set; }

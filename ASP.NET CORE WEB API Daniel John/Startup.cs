@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ASP.NET_CORE_WEB_API_Daniel_John.Data;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John
 {
@@ -32,6 +34,9 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ASP.NET_CORE_WEB_API_Daniel_John", Version = "v1" });
             });
+
+            services.AddDbContext<GeoDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("GeoDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
