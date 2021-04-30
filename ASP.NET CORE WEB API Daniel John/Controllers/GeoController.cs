@@ -2,6 +2,7 @@
 using ASP.NET_CORE_WEB_API_Daniel_John.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GeoMessage>> GetGeotest(int id)
+        public async Task<ActionResult<GeoMessage>> GetGeo(int id)
         {
             var test = await _context.GeoMessage.FindAsync(id);
             if(test == null)
@@ -32,16 +33,19 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         }
 
 
-        /*[HttpGet]
-        public async Task<ActionResult<GeoMessage>> GetGeoAll()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<GeoMessage>>> GetGeoAll()
         {
-            var test = await _context.GeoMessage.FindAsync();
+            var test = await _context.GeoMessage.Where(g => g.Id > 0).ToListAsync();
             if (test == null)
             {
                 return NotFound();
             }
             return test;
-        }*/
+        }
+
+
+        /*[HttpPost] */
 
     }
 }
