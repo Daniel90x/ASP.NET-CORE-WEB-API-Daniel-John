@@ -45,7 +45,35 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         }
 
 
-        /*[HttpPost] */
+         [HttpPost]
+         public async Task<ActionResult<GeoMessage>> PostGeoMessage(GeoMessage geoPost)
+        {
+            _context.GeoMessage.AddAsync(new GeoMessage()
+            {
+                Message = geoPost.Message,
+                Latitude = geoPost.Latitude,
+                Longitude = geoPost.Longitude
+
+            });
+
+            _context.SaveChangesAsync();
+            return Ok();
+
+
+
+        }
 
     }
 }
+
+/*  [HttpPost]
+        public async Task<ActionResult<TodoDTO>> PostTodo(TodoDTO dto)
+        {
+            var todo = dto.ToModel();
+            _context.Todo.Add(todo);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTodo", new { id = todo.Id }, dto);
+        }
+
+*/
