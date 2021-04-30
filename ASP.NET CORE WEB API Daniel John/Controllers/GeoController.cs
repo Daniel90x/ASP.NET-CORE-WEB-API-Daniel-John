@@ -20,7 +20,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             _context = context;
         }
 
-        [HttpGet/*("{id}")*/]
+        [HttpGet("{id}")]
         public async Task<ActionResult<GeoMessage>> GetGeotest(int id)
         {
             var test = await _context.GeoMessage.FindAsync(id);
