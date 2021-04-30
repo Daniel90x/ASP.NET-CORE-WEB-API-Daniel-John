@@ -12,3 +12,5 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
         public double latitude { get; set; }
     }
 }
+
+// Hej test 
