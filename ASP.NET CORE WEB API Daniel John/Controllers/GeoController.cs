@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]-comments")]
     [ApiController]
     public class GeoController : ControllerBase
     {
@@ -64,7 +64,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         }
 
     }
-}
+} /*          KOLLA MER PÅ DTO, För att få bara de properties som vi vill ha med oss */
 
 
 
