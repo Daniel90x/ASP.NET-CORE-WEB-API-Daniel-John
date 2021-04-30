@@ -21,12 +21,12 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
             await this.Database.EnsureCreatedAsync();
 
 
-            /*GeoMessage.AddRange(new List<GeoMessage>()
+            GeoMessage.AddRange(new List<GeoMessage>()
             {
                 new GeoMessage(){Message = "Hejsan", Longitude = 25, Latitude = 33},
                 new GeoMessage(){Message = "KAn du ha det bra?", Longitude = 77, Latitude = 12},
 
-            });*/
+            });
 
 
             await SaveChangesAsync();

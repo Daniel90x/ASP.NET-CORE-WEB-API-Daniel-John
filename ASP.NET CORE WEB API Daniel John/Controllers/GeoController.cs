@@ -20,12 +20,28 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<GeoMessage>> GetGeo(int id)
+        [HttpGet/*("{id}")*/]
+        public async Task<ActionResult<GeoMessage>> GetGeotest(int id)
         {
             var test = await _context.GeoMessage.FindAsync(id);
+            if(test == null)
+            {
+                return NotFound();
+            }
             return test;
         }
+
+
+        /*[HttpGet]
+        public async Task<ActionResult<GeoMessage>> GetGeoAll()
+        {
+            var test = await _context.GeoMessage.FindAsync();
+            if (test == null)
+            {
+                return NotFound();
+            }
+            return test;
+        }*/
 
     }
 }
