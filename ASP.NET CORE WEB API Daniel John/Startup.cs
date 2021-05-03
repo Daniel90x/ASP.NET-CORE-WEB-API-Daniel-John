@@ -13,6 +13,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ASP.NET_CORE_WEB_API_Daniel_John.Data;
+using ASP.NET_CORE_WEB_API_Daniel_John.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John
 {
@@ -34,6 +38,12 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ASP.NET_CORE_WEB_API_Daniel_John", Version = "v1" });
             });
+
+            services.AddDefaultIdentity<MyUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<GeoDbContext>();
+
+
 
             services.AddDbContext<GeoDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GeoDbContext")));
