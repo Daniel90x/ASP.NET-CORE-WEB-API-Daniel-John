@@ -70,6 +70,8 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
 
             services.AddDbContext<GeoDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GeoDbContext")));
+           /*  services.AddDbContext<UserDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("UserDbContext"))); */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

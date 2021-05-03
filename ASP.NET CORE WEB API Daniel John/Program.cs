@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
 namespace ASP.NET_CORE_WEB_API_Daniel_John
 {
     public class Program
@@ -20,8 +22,9 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<GeoDbContext>();
+                var context = services.GetRequiredService<GeoDbContext>(); // GeoDbContext
                 await context.Seed();
+                // UserDbContext.Reset(services).Wait();
             }
             host.Run();
         }

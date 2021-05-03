@@ -12,12 +12,12 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 {
     public class GeoDbContext : DbContext
     {
-        public GeoDbContext (DbContextOptions<GeoDbContext> options)
+        public GeoDbContext(DbContextOptions<GeoDbContext> options)
             : base(options)
         {
         }
 
-        public async Task Seed ()
+        public async Task Seed()
         {
             // var context = GeoDbContext();
             await this.Database.EnsureDeletedAsync();
@@ -31,13 +31,39 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 
             });
 
-
             await SaveChangesAsync();
         }
         public DbSet<GeoMessage> GeoMessage { get; set; }
 
-        
 
 
+
+    }
+
+    public class UserDbContext : IdentityDbContext<IdentityUser>
+    {
+        public UserDbContext(DbContextOptions<UserDbContext> options)
+            : base(options)
+        {
+        }
+
+
+
+        /*
+        public static async Task Reset(IServiceProvider provider)
+        {
+            var context = provider.GetRequiredService<UserDbContext>();
+            await context.Database.EnsureDeletedAsync();
+            await context.Database.EnsureCreatedAsync();
+
+            var userManager = provider.GetRequiredService<UserManager<IdentityUser>>();
+
+            await userManager.CreateAsync(
+                new IdentityUser
+                {
+                    UserName = "TestUser"
+                },
+                "QWEqwe123!\"#");
+        } */
     }
 }

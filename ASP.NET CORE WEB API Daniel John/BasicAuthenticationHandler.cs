@@ -19,14 +19,16 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
 
-        // private readonly UserManager<IdentityUser> _userManager;
+        //private readonly UserManager<IdentityUser> _userManager;
         public BasicAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock)
+            //UserManager<IdentityUser> userManager)
             : base(options, logger, encoder, clock)
         {
+           // _userManager = userManager;
         }
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
