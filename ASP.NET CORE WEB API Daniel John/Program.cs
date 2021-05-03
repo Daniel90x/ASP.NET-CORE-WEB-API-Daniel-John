@@ -23,7 +23,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             {
                 var services = scope.ServiceProvider;
                 var context = services.GetRequiredService<GeoDbContext>(); // GeoDbContext
-                await context.Seed();
+                await context.Seed(/*services*/);
                 // UserDbContext.Reset(services).Wait();
             }
             host.Run();

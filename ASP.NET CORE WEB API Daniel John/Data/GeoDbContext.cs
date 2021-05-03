@@ -10,19 +10,23 @@ using ASP.NET_CORE_WEB_API_Daniel_John.Models;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 {
-    public class GeoDbContext : DbContext
+    public class GeoDbContext : DbContext/*IdentityDbContext<IdentityUser> */
     {
         public GeoDbContext(DbContextOptions<GeoDbContext> options)
             : base(options)
         {
         }
 
-        public async Task Seed()
+        public DbSet<MyUser> User { get; set; }
+        public DbSet<GeoMessage> GeoMessage { get; set; }
+
+        public async Task Seed(/*IServiceProvider provider*/)
         {
-            // var context = GeoDbContext();
+            // var context = provider.GetRequiredService<GeoDbContext>();
             await this.Database.EnsureDeletedAsync();
             await this.Database.EnsureCreatedAsync();
 
+            //var userManager = provider.GetRequiredService<UserManager<IdentityUser>>();
 
             GeoMessage.AddRange(new List<GeoMessage>()
             {
@@ -31,15 +35,25 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 
             });
 
+            /* await userManager.CreateAsync(
+                new IdentityUser
+                {
+                    UserName = "Tester"
+                },
+
+                "Tester123\"#"); */
+
+
+
             await SaveChangesAsync();
         }
-        public DbSet<GeoMessage> GeoMessage { get; set; }
 
 
 
 
     }
 
+    /*
     public class UserDbContext : IdentityDbContext<IdentityUser>
     {
         public UserDbContext(DbContextOptions<UserDbContext> options)
@@ -47,9 +61,9 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
         {
         }
 
+    
 
-
-        /*
+        
         public static async Task Reset(IServiceProvider provider)
         {
             var context = provider.GetRequiredService<UserDbContext>();
@@ -64,6 +78,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
                     UserName = "TestUser"
                 },
                 "QWEqwe123!\"#");
-        } */
-    }
+        } 
+    } */
 }
