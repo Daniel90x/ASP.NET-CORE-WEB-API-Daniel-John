@@ -27,7 +27,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
             GeoMessage.AddRange(new List<GeoMessage>()
             {
                 new GeoMessage(){Message = "Hejsan", Longitude = 25, Latitude = 33},
-                new GeoMessage(){Message = "KAn du ha det bra?", Longitude = 77, Latitude = 12},
+                new GeoMessage(){Message = "Kan du ha det bra?", Longitude = 77, Latitude = 12},
 
             });
 

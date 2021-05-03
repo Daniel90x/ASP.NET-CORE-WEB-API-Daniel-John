@@ -48,7 +48,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
         }
 
-        [Authorize]
+        [Authorize] 
         [HttpPost]
          public async Task<ActionResult<GeoMessageDTO>> PostGeoMessage(GeoMessageDTO geoPost)
         {
