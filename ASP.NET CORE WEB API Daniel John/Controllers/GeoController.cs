@@ -46,17 +46,25 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
 
          [HttpPost]
-         public async Task<ActionResult<GeoMessage>> PostGeoMessage(GeoMessage geoPost)
+         public async Task<ActionResult<GeoMessageDTO>> PostGeoMessage(GeoMessageDTO geoPost)
         {
-            _context.GeoMessage.AddAsync(new GeoMessage()
-            {
-                Message = geoPost.Message,
-                Latitude = geoPost.Latitude,
-                Longitude = geoPost.Longitude
+            /* await _context.GeoMessage.AddAsync(new GeoMessage()
+             {
+                 Message = geoPost.Message,
+                 Latitude = geoPost.Latitude,
+                 Longitude = geoPost.Longitude
 
-            });
+             });
 
-            _context.SaveChangesAsync();
+             await _context.SaveChangesAsync();
+             return Ok();*/
+
+
+            var geo = geoPost.GeoMessageModel();
+            _context.GeoMessage.Add(geo);
+            await _context.SaveChangesAsync();
+
+            //return CreatedAtAction("test", new {id = geo.Id }, geoPost);
             return Ok();
 
 
