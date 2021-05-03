@@ -26,7 +26,10 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
                 Latitude = this.Latitude,
             };
         }
-       // public GeoMessageDTO 
+       public GeoMessageDTO ToDto()
+        {
+            return this;
+        }
     }
 
         

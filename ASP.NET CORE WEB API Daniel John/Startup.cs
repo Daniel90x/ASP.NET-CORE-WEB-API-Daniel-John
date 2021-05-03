@@ -53,6 +53,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

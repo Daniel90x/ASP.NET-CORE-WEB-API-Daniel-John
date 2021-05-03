@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 {
@@ -22,7 +24,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GeoMessage>> GetGeo(int id)
+        public async Task<ActionResult<GeoMessage>> GetGeo(int id) // Kanske lägga till DTO senare?
         {
             var test = await _context.GeoMessage.FindAsync(id);
             if(test == null)
@@ -34,18 +36,20 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GeoMessage>>> GetGeoAll()
+        public async Task<ActionResult<IEnumerable<GeoMessageDTO>>> GetGeoAll()
         {
-            var test = await _context.GeoMessage.Where(g => g.Id > 0).ToListAsync();
+            /*var test = await _context.GeoMessage.Where(g => g.Id > 0).ToListAsync();
             if (test == null)
             {
                 return NotFound();
             }
-            return test;
+            return test;*/
+
+            return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
         }
 
-
-         [HttpPost]
+        [Authorize]
+        [HttpPost]
          public async Task<ActionResult<GeoMessageDTO>> PostGeoMessage(GeoMessageDTO geoPost)
         {
             /* await _context.GeoMessage.AddAsync(new GeoMessage()
