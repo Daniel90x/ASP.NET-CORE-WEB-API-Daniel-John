@@ -12,83 +12,55 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 {
-    [Route("api/v1/[controller]-comments")]
-    [ApiController]
-    public class GeoController : ControllerBase
+
+
+    namespace V1
     {
-        private readonly GeoDbContext _context;
-
-        public GeoController(GeoDbContext context)
+        [ApiController]
+        [ApiVersion("1.0")]
+        [Route("api/v{Version:ApiVersion}/[controller]-comments")] //[Version:ApiVersion]
+        public class GeoController : ControllerBase
         {
-            _context = context;
-        }
+            private readonly GeoDbContext _context;
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GeoMessage>> GetGeo(int id) // Kanske lägga till DTO senare?
-        {
-            var test = await _context.GeoMessage.FindAsync(id);
-            if(test == null)
+            public GeoController(GeoDbContext context)
             {
-                return NotFound();
+                _context = context;
             }
-            return test;
-        }
 
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GeoMessageDTO>>> GetGeoAll()
-        {
-            /*var test = await _context.GeoMessage.Where(g => g.Id > 0).ToListAsync();
-            if (test == null)
+            [HttpGet("{id}")]
+            public async Task<ActionResult<GeoMessage>> GetGeo(int id) 
             {
-                return NotFound();
+                var test = await _context.GeoMessage.FindAsync(id);
+                if (test == null)
+                {
+                    return NotFound();
+                }
+                return test;
             }
-            return test;*/
-
-            return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
-        }
-
-        [Authorize] 
-        [HttpPost]
-         public async Task<ActionResult<GeoMessageDTO>> PostGeoMessage(GeoMessageDTO geoPost)
-        {
-            /* await _context.GeoMessage.AddAsync(new GeoMessage()
-             {
-                 Message = geoPost.Message,
-                 Latitude = geoPost.Latitude,
-                 Longitude = geoPost.Longitude
-
-             });
-
-             await _context.SaveChangesAsync();
-             return Ok();*/
 
 
-            var geo = geoPost.GeoMessageModel();
-            _context.GeoMessage.Add(geo);
-            await _context.SaveChangesAsync();
-
-            //return CreatedAtAction("test", new {id = geo.Id }, geoPost);
-            return Ok();
+            [HttpGet]
+            public async Task<ActionResult<IEnumerable<GeoMessageDTO>>> GetGeoAll()
+            {
 
 
+                return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
+            }
+
+            [Authorize]
+            [HttpPost]
+            public async Task<ActionResult<GeoMessageDTO>> PostGeoMessage(GeoMessageDTO geoPost)
+            {
+
+                var geo = geoPost.GeoMessageModel();
+                _context.GeoMessage.Add(geo);
+                await _context.SaveChangesAsync();
+
+                return Ok();
+
+            }
 
         }
-
     }
-} /*          KOLLA MER PÅ DTO, För att få bara de properties som vi vill ha med oss */
-
-
-
-/* WiP */
-/*  [HttpPost]
-        public async Task<ActionResult<TodoDTO>> PostTodo(TodoDTO dto)
-        {
-            var todo = dto.ToModel();
-            _context.Todo.Add(todo);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTodo", new { id = todo.Id }, dto);
-        }
-
-*/
+}
