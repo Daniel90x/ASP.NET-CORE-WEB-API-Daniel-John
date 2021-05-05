@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ASP.NET_CORE_WEB_API_Daniel_John.Models;
+using ASP.NET_CORE_WEB_API_Daniel_John.Models.V2;
+
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 {
