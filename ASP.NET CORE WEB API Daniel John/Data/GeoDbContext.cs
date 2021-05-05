@@ -43,7 +43,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
                     LastName = "Svensson"
                 },
 
-                "Tester123\"#"); 
+                "Tester_123"); 
 
 
 
