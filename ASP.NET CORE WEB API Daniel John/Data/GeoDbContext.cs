@@ -10,7 +10,7 @@ using ASP.NET_CORE_WEB_API_Daniel_John.Models;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 {
-    public class GeoDbContext : DbContext/*IdentityDbContext<IdentityUser> */
+    public class GeoDbContext : /* DbContext */ IdentityDbContext<MyUser> 
     {
         public GeoDbContext(DbContextOptions<GeoDbContext> options)
             : base(options)
@@ -20,13 +20,13 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
         public DbSet<MyUser> User { get; set; }
         public DbSet<GeoMessage> GeoMessage { get; set; }
 
-        public async Task Seed(/*IServiceProvider provider*/)
+        public async Task Seed(IServiceProvider provider)
         {
-            // var context = provider.GetRequiredService<GeoDbContext>();
+            var context = provider.GetRequiredService<GeoDbContext>();
             await this.Database.EnsureDeletedAsync();
             await this.Database.EnsureCreatedAsync();
 
-            //var userManager = provider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = provider.GetRequiredService<UserManager<MyUser>>();
 
             GeoMessage.AddRange(new List<GeoMessage>()
             {
@@ -35,13 +35,15 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 
             });
 
-            /* await userManager.CreateAsync(
-                new IdentityUser
+             await userManager.CreateAsync(
+                new MyUser
                 {
-                    UserName = "Tester"
+                    UserName = "Tester",
+                    FirstName = "Hans",
+                    LastName = "Svensson"
                 },
 
-                "Tester123\"#"); */
+                "Tester123\"#"); 
 
 
 

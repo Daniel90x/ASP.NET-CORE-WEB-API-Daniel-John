@@ -33,6 +33,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             return AuthenticateResult.Fail("Not allowed");
+            //return AuthenticateResult.Success();
         }
     }
 }
