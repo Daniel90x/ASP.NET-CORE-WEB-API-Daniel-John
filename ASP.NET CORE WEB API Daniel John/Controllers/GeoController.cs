@@ -127,8 +127,10 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 testar.Add(test.Author);
                 testar.Add(test.Title);
                 test.Message = testar;*/
+
+
                 var testar = new Models.V2.GeoMessage();
-                testar.Message = test.Title + test.Body + test.Author;
+       //         testar.Message = test.Title + test.Body + test.Author;
                 testar.Latitude = test.Latitude;
                 testar.Longitude = test.Longitude;
                 string json = JsonConvert.SerializeObject(testar);

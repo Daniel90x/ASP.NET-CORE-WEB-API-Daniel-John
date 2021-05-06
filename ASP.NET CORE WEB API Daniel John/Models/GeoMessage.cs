@@ -13,7 +13,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
         public class GeoMessage : GeoMessageDTO
         {
             public int Id { get; set; }
-
+             
         }
 
 
@@ -21,17 +21,37 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
 
         public class GeoMessageDTO
         {
-
-            public string Message { get; set; }
             public double Longitude { get; set; }
-            public double Latitude { get; set; }
+            public double Latitude { get; set; }  
             public string Title { get; set; }
             public string Author { get; set; }
-            public string Body { get; set; } 
+            public string Body { get; set; }   
 
+
+
+
+       /*   public class MessageDTOv2
+            {
+                string Title;
+                string Body;
+                string Author;
+            }
+
+            public class GeoMessageDTO2
+            {
+
+                MessageDTOv2 Message;
+                double Longitude;
+                double Latitude;
+            }     */
 
             public GeoMessage GeoMessageModel()
             {
+
+
+
+
+
                 /*var test = new GeoMessage
                 {
                     Title = this.Title,
@@ -40,7 +60,15 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
                 };*/
                 return new GeoMessage
                 {
-                    //Message = this.Title + this.Author + this.Body,
+
+
+
+
+
+
+
+
+                 
                     Longitude = this.Longitude,
                     Latitude = this.Latitude,
                     Title = this.Title,
@@ -101,12 +129,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
         }
 
     }
-
-
-
-
-
-
 
 
 }
