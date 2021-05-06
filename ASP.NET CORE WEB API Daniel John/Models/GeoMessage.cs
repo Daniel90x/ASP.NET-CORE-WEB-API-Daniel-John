@@ -16,9 +16,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
              
         }
 
-
-
-
         public class GeoMessageDTO
         {
             public double Longitude { get; set; }
@@ -31,46 +28,38 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
 
 
 
-       /*   public class MessageDTOv2
-            {
-                string Title;
-                string Body;
-                string Author;
-            }
+   
 
-            public class GeoMessageDTO2
-            {
-
-                MessageDTOv2 Message;
-                double Longitude;
-                double Latitude;
-            }     */
+       
 
             public GeoMessage GeoMessageModel()
             {
 
 
+            /* public class MessageDTOv2
+           {
+               string Title;
+               string Body;
+               string Author;
+           }  */
 
 
 
-                /*var test = new GeoMessage
-                {
-                    Title = this.Title,
-                    Author = this.Author,
-                    Body = this.Body
-                };*/
-                return new GeoMessage
-                {
-
-
-
-
+               return new GeoMessage
+               {
 
 
 
 
-                 
-                    Longitude = this.Longitude,
+        /* public class GeoMessageDTO2
+           {
+
+               MessageDTOv2 Message;
+               double Longitude;
+               double Latitude;
+           }     */
+
+                Longitude = this.Longitude,
                     Latitude = this.Latitude,
                     Title = this.Title,
                     Author = this.Author,
@@ -82,18 +71,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
                 return this;
             }
 
-         /*   public GeoMessage GeoMessageModel2()
-            {
-                return new GeoMessage
-                {
-                    Longitude = this.Longitude,
-                    Latitude = this.Latitude, 
-                };
-            }
-            public GeoMessageDTO ToDto2()
-            {
-                return this;
-            } */
+        
         }
 
     }
@@ -133,6 +111,28 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
 
 
 }
-    
 
 
+
+/*var test = new GeoMessage
+              {
+                  Title = this.Title,
+                  Author = this.Author,
+                  Body = this.Body
+              };*/
+
+
+
+
+/*   public GeoMessage GeoMessageModel2()
+           {
+               return new GeoMessage
+               {
+                   Longitude = this.Longitude,
+                   Latitude = this.Latitude, 
+               };
+           }
+           public GeoMessageDTO ToDto2()
+           {
+               return this;
+           } */

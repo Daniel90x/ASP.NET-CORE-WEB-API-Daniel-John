@@ -40,7 +40,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                     return NotFound();
                 }
                 var geoV1 = new Models.V1.GeoMessageDTO {
-                    //Message = test.Message,
+                    Message = test.Message,         // maybe
                     Longitude = test.Longitude,
                     Latitude = test.Latitude
                     
@@ -61,7 +61,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
                 var geoV1 = new Models.V1.GeoMessage
                 {
-                    //Message = geoV2.Message,
+                    Message = geoV2.Message,          // maybe
                     Longitude = geoV2.Longitude,
                     Latitude = geoV2.Latitude
 
@@ -72,7 +72,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
                 var geoV2 = new Models.V2.GeoMessage
                 {
-                    //Message = geoV1.Message,
+                    Message = geoV1.Message,         // Maybe?
                     Longitude = geoV1.Longitude,
                     Latitude = geoV1.Latitude
 
