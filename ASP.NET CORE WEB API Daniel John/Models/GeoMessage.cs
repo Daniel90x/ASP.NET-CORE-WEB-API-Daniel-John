@@ -26,6 +26,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
             public string Title { get; set; }
             public string Author { get; set; }
             public string Body { get; set; }   
+            public string Message { get; set; } // SKA TA BORT
 
 
 
