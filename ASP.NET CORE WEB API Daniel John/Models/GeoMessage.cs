@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
 {
@@ -11,7 +13,10 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
         public class GeoMessage : GeoMessageDTO
         {
             public int Id { get; set; }
+
         }
+
+
 
 
         public class GeoMessageDTO
@@ -27,9 +32,15 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
 
             public GeoMessage GeoMessageModel()
             {
+                /*var test = new GeoMessage
+                {
+                    Title = this.Title,
+                    Author = this.Author,
+                    Body = this.Body
+                };*/
                 return new GeoMessage
                 {
-                    Message = this.Message,
+                    //Message = this.Title + this.Author + this.Body,
                     Longitude = this.Longitude,
                     Latitude = this.Latitude,
                     Title = this.Title,
@@ -41,6 +52,19 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
             {
                 return this;
             }
+
+         /*   public GeoMessage GeoMessageModel2()
+            {
+                return new GeoMessage
+                {
+                    Longitude = this.Longitude,
+                    Latitude = this.Latitude, 
+                };
+            }
+            public GeoMessageDTO ToDto2()
+            {
+                return this;
+            } */
         }
 
     }

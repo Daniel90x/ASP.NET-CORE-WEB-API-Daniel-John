@@ -19,6 +19,11 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
         {
         }
 
+       /*  protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GeoMessage>().Ignore(g => g.Message);
+        } */
+
         public DbSet<MyUser> User { get; set; }
         public DbSet<GeoMessage> GeoMessage { get; set; }
 
@@ -32,8 +37,8 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 
             GeoMessage.AddRange(new List<GeoMessage>()
             {
-                new GeoMessage(){Message = "Hejsan", Longitude = 25, Latitude = 33},
-                new GeoMessage(){Message = "Kan du ha det bra?", Longitude = 77, Latitude = 12},
+                new GeoMessage(){/*Message = "Hejsan",*/ Longitude = 25, Latitude = 33},
+                new GeoMessage(){/*Message = "Kan du ha det bra?",*/ Longitude = 77, Latitude = 12},
 
             });
 
@@ -57,31 +62,4 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 
     }
 
-    /*
-    public class UserDbContext : IdentityDbContext<IdentityUser>
-    {
-        public UserDbContext(DbContextOptions<UserDbContext> options)
-            : base(options)
-        {
-        }
-
-    
-
-        
-        public static async Task Reset(IServiceProvider provider)
-        {
-            var context = provider.GetRequiredService<UserDbContext>();
-            await context.Database.EnsureDeletedAsync();
-            await context.Database.EnsureCreatedAsync();
-
-            var userManager = provider.GetRequiredService<UserManager<IdentityUser>>();
-
-            await userManager.CreateAsync(
-                new IdentityUser
-                {
-                    UserName = "TestUser"
-                },
-                "QWEqwe123!\"#");
-        } 
-    } */
 }
