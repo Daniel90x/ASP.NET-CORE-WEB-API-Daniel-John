@@ -31,14 +31,14 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             }
 
             [HttpGet("{id}")]
-            public async Task<ActionResult<Models.V1.GeoMessage>> GetGeo(int id) 
+            public async Task<ActionResult<Models.V1.GeoMessageDTO>> GetGeo(int id) 
             {
                 var test = await _context.GeoMessage.FindAsync(id);
                 if (test == null)
                 {
                     return NotFound();
                 }
-                var geoV1 = new Models.V1.GeoMessage {
+                var geoV1 = new Models.V1.GeoMessageDTO {
                     Message = test.Message,
                     Longitude = test.Longitude,
                     Latitude = test.Latitude
@@ -67,9 +67,16 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 };
                 return geoV1;
             }
-            public static Models.V2.GeoMessageDTO V1GeoMessageDTOToV2(Models.V1.GeoMessageDTO geoV1)
+            public static Models.V2.GeoMessage V1GeoMessageDTOToV2(Models.V1.GeoMessageDTO geoV1)
             {
+                var geoV2 = new Models.V2.GeoMessage
+                {
+                    Message = geoV1.Message,
+                    Longitude = geoV1.Longitude,
+                    Latitude = geoV1.Latitude
 
+                };
+                return geoV2;
             }
 
             [Authorize]
@@ -78,15 +85,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
 
                 var geo = geoPost.GeoMessageModel();
-                //var geoV2 = V2GeoMessageDTOToV1(geoPost);
-
-                var geoV2 = new Models.V1.GeoMessage
-                {
-                    Message = geoPost.Message,
-                    Longitude = geoPost.Longitude,
-                    Latitude = geoPost.Latitude
-
-                };
+                var geoV2 = V1GeoMessageDTOToV2(geoPost);
 
 
                 _context.GeoMessage.Add(geoV2); // WiP 
