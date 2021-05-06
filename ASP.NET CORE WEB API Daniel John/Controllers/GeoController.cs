@@ -126,11 +126,11 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
 
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<Models.V2.GeoMessage>>> GetGeoAll()
+            public async Task<ActionResult<IEnumerable<Models.V2.GeoMessageDTO>>> GetGeoAll()
             {
 
 
-                return await _context.GeoMessage/* .Select(g => g.ToDto()) */.ToListAsync();
+                return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
             }
 
             [Authorize]

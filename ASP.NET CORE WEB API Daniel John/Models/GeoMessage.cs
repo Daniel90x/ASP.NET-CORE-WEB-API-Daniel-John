@@ -32,6 +32,9 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Models
                     Message = this.Message,
                     Longitude = this.Longitude,
                     Latitude = this.Latitude,
+                    Title = this.Title,
+                    Author = this.Author,
+                    Body = this.Body
                 };
             }
             public GeoMessageDTO ToDto()
