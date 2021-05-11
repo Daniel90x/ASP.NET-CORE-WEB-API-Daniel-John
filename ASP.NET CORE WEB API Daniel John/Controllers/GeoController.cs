@@ -152,14 +152,19 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 };
 
             }
-
+            
+            
 
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<Models.V2.GeoMessageDTO>>> GetGeoAll()
+            public async Task<ActionResult<IEnumerable<Models.V2.GeoMessageDTO>>> GetGeoAll
+                (double? MaxLongitude, double? MinLongitude, double? MaxLatitude, double? MinLatitude)
             {
-
-
-                return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
+                if (MaxLatitude == null || MinLatitude == null || MaxLongitude == null || MinLongitude == null)
+                {
+                    return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
+                }
+                return await _context.GeoMessage.Where(g => g.Longitude >= MinLongitude && g.Longitude <= MaxLongitude
+                && g.Latitude >= MinLatitude && g.Latitude <= MaxLatitude).ToListAsync();
             }
 
             [Authorize]
