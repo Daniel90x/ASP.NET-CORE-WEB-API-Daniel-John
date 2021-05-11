@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
-
-
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 {
@@ -108,10 +108,17 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         public class GeoController : ControllerBase
         {
             private readonly GeoDbContext _context;
+            private readonly UserManager<MyUser> _userManager;
 
-            public GeoController(GeoDbContext context)
+
+            public MyUser MyUser { get; set; }
+
+    
+
+            public GeoController(GeoDbContext context, UserManager<MyUser> userManager)
             {
                 _context = context;
+                _userManager = userManager;
             }
 
             [HttpGet("{id}")]
@@ -200,16 +207,31 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
             [Authorize]
             [HttpPost]
-            public async Task<ActionResult<Return>> PostGeoMessage(Return geoPost)
+            public async Task<ActionResult<Return>> PostGeoMessage(Return geoPost/*, UserManager<MyUser> userManager*/)
             {
-                
+
+                //var user = await _context.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefaultAsync();
+                // MyUser = user;
+
+                //var userId = User.Claims.FirstOrDefault(c => c.Type  == ClaimTypes.Name).Value;
+                //var user = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
+
+
+                /*       string id;
+                       id = User.Identity.GetUserId();
+                       id = RequestContext.Principal.Identity.GetUserId(); */
+                var test = User.Identity.Name;
+                var claim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+
+
+
                 _context.GeoMessage.Add(new Models.V2.GeoMessage {
-                    Author = geoPost.Message.Author, // Ska känna av automatiskt
+                    Author = test,
                     Title = geoPost.Message.Title,
                     Body = geoPost.Message.Body,
                     Latitude = geoPost.Latitude,
                     Longitude = geoPost.Longitude
-
 
                 });
                 await _context.SaveChangesAsync();

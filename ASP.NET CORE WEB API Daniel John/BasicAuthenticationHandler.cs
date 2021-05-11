@@ -53,6 +53,13 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
                 password = credentials[1];
 
                 user = await _userManager.FindByNameAsync(username);
+
+
+                var claims = new List<Claim> {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),         // WiP 
+            };
+
             }
             catch
             {
