@@ -204,7 +204,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
                 
                 _context.GeoMessage.Add(new Models.V2.GeoMessage {
-                    Author = geoPost.Message.Author,
+                    Author = geoPost.Message.Author, // Ska känna av automatiskt
                     Title = geoPost.Message.Title,
                     Body = geoPost.Message.Body,
                     Latitude = geoPost.Latitude,
