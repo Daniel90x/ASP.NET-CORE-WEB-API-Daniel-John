@@ -115,7 +115,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             }
 
             [HttpGet("{id}")]
-            public async Task<ActionResult<Models.V2.GeoMessage>> GetGeo(int id)
+            public async Task<ActionResult<Return>> GetGeo(int id)
             {
                 var test = await _context.GeoMessage.FindAsync(id);
                 if (test == null)
@@ -129,13 +129,28 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 test.Message = testar;*/
 
 
-                var testar = new Models.V2.GeoMessage();
+                /*var testar = new Models.V2.GeoMessage();
                 testar.Message = test.Title + test.Body + test.Author;
                 testar.Latitude = test.Latitude;
                 testar.Longitude = test.Longitude;
                 string json = JsonConvert.SerializeObject(testar);
 
-                return testar;
+                return testar; */
+
+                var message = new Message
+                {
+                    Title = test.Title,
+                    Body = test.Body,
+                    Author = test.Author
+                };
+
+                return new Return
+                {
+                    Message = message,
+                    Latitude = test.Latitude,
+                    Longitude = test.Longitude,
+                };
+
             }
 
 
@@ -159,6 +174,22 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 return Ok();
 
             }
+
+
+            public class Return
+            {
+                public Message Message { get; set; }
+                public double Longitude { get; set; }
+                public double Latitude { get; set; }
+            }
+
+            public class Message
+            {
+                public string Title { get; set; }
+                public string Body { get; set; }
+                public string Author { get; set; }
+            }
+
 
         }
 
