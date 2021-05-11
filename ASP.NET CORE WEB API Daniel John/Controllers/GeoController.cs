@@ -175,6 +175,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                             Message = Result.Message
 
                         });
+
                     }
                     return GeoList;
                 }
@@ -199,11 +200,18 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
             [Authorize]
             [HttpPost]
-            public async Task<ActionResult<Models.V2.GeoMessage>> PostGeoMessage(Models.V2.GeoMessageDTO geoPost)
+            public async Task<ActionResult<Return>> PostGeoMessage(Return geoPost)
             {
+                
+                _context.GeoMessage.Add(new Models.V2.GeoMessage {
+                    Author = geoPost.Message.Author,
+                    Title = geoPost.Message.Title,
+                    Body = geoPost.Message.Body,
+                    Latitude = geoPost.Latitude,
+                    Longitude = geoPost.Longitude
 
-                var geo = geoPost.GeoMessageModel();
-                _context.GeoMessage.Add(geo);
+
+                });
                 await _context.SaveChangesAsync();
 
                 return Ok();
