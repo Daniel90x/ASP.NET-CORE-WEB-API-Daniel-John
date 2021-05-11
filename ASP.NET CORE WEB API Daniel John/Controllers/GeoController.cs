@@ -156,15 +156,45 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             
 
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<Models.V2.GeoMessageDTO>>> GetGeoAll
+            public async Task<ActionResult<List<Return>>> GetGeoAll
                 (double? MaxLongitude, double? MinLongitude, double? MaxLatitude, double? MinLatitude)
             {
                 if (MaxLatitude == null || MinLatitude == null || MaxLongitude == null || MinLongitude == null)
                 {
-                    return await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
+                    var AllGeo = await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
+
+                    var GeoList = new List<Return>();
+
+                    foreach (var item in AllGeo)
+                    {
+                        var Result = ToMessage(item);
+                        GeoList.Add(new Return
+                        {
+                            Latitude = Result.Latitude,
+                            Longitude = Result.Longitude,
+                            Message = Result.Message
+
+                        });
+                    }
+                    return GeoList;
                 }
-                return await _context.GeoMessage.Where(g => g.Longitude >= MinLongitude && g.Longitude <= MaxLongitude
+                var AllGeo2 = await _context.GeoMessage.Where(g => g.Longitude >= MinLongitude && g.Longitude <= MaxLongitude
                 && g.Latitude >= MinLatitude && g.Latitude <= MaxLatitude).ToListAsync();
+
+                var GeoList2 = new List<Return>();
+
+                foreach (var item in AllGeo2)
+                {
+                    var Result = ToMessage(item);
+                    GeoList2.Add(new Return
+                    {
+                        Latitude = Result.Latitude,
+                        Longitude = Result.Longitude,
+                        Message = Result.Message
+
+                    });
+                }
+                return GeoList2;
             }
 
             [Authorize]
@@ -194,6 +224,27 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 public string Body { get; set; }
                 public string Author { get; set; }
             }
+
+
+
+            public static Return ToMessage(Models.V2.GeoMessageDTO test)
+            {
+                var message = new Message
+                {
+                    Title = test.Title,
+                    Body = test.Body,
+                    Author = test.Author
+                };
+
+                return new Return
+                {
+                    Message = message,
+                    Latitude = test.Latitude,
+                    Longitude = test.Longitude,
+                };
+            }
+
+
 
 
         }
