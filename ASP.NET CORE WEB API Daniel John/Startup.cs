@@ -36,7 +36,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                //c.SwaggerDoc("v1", new OpenApiInfo { Title = "ASP.NET_CORE_WEB_API_Daniel_John", Version = "v1" });
+               
                 c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -59,6 +59,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
                             new string[] {}
                     }
                 });
+               
             });
 
             services.AddDefaultIdentity<MyUser>()
@@ -85,10 +86,11 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             });
 
             services.AddSwaggerGen(o => {
-            o.SwaggerDoc("v1", new OpenApiInfo
+                o.EnableAnnotations();
+                o.SwaggerDoc("v1", new OpenApiInfo
                 {Title = "Versioning by Url", Version = "v1.0" });
 
-            o.SwaggerDoc("v2", new OpenApiInfo
+                o.SwaggerDoc("v2", new OpenApiInfo
                 { Title = "Versioning by Url", Version = "v2.0" });
 
 
@@ -109,8 +111,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
                 {
                     o.SwaggerEndpoint($"/swagger/v1/swagger.json", "v1.0");
                     o.SwaggerEndpoint($"/swagger/v2/swagger.json", "v2.0");
-                });
-                //app.UseSwaggerUI(o => o.SwaggerEndpoint("/swagger/v2/swagger.json", "ASP.NET_CORE_WEB_API_Daniel_John v2"));
+                });     
             }
 
             app.UseHttpsRedirection();

@@ -12,10 +12,13 @@ using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 {
 
+
+    
 
     namespace V1
     {
@@ -24,6 +27,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
         [Route("api/v{Version:ApiVersion}/[controller]-comments")]
         public class GeoController : ControllerBase
         {
+
             private readonly GeoDbContext _context;
 
             public GeoController(GeoDbContext context)
@@ -216,6 +220,13 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             
 
             [HttpGet]
+            [SwaggerOperation(
+                Summary = "Lägg in parametrar för mer noggrann sökning.",
+                Description = "Här i Geo-coments V2, så kan man lägga in 4 olika parametrar som bestämmer hur noggrann din sökning är. " +
+                "Om någon parameter saknas så tar den hela listan istället. "
+
+                )]
+            [SwaggerResponse(200,Description = "Tjohej! Nu har du fått din lösning!")]
             public async Task<ActionResult<List<Return>>> GetGeoAll
                 (double? MaxLongitude, double? MinLongitude, double? MaxLatitude, double? MinLatitude)
             {
