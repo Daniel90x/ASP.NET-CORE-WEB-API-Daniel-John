@@ -129,20 +129,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 {
                     return NotFound();
                 }
-                /*List<string> testar = new List<string>();
-                testar.Add(test.Body);
-                testar.Add(test.Author);
-                testar.Add(test.Title);
-                test.Message = testar;*/
-
-
-                /*var testar = new Models.V2.GeoMessage();
-                testar.Message = test.Title + test.Body + test.Author;
-                testar.Latitude = test.Latitude;
-                testar.Longitude = test.Longitude;
-                string json = JsonConvert.SerializeObject(testar);
-
-                return testar; */
 
                 var message = new Message
                 {
@@ -175,13 +161,29 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                     foreach (var item in AllGeo)
                     {
                         var Result = ToMessage(item);
-                        GeoList.Add(new Return
-                        {
-                            Latitude = Result.Latitude,
-                            Longitude = Result.Longitude,
-                            Message = Result.Message
 
-                        });
+                        if (Result.Message.Body == null)
+                        {
+                            Result.Message.Body = item.Message;
+                            GeoList.Add(new Return
+                            {
+                                Latitude = Result.Latitude,
+                                Longitude = Result.Longitude,
+                                Message = Result.Message
+
+                            });
+                        }
+
+                        else
+                        {
+                            GeoList.Add(new Return
+                            {
+                                Latitude = Result.Latitude,
+                                Longitude = Result.Longitude,
+                                Message = Result.Message
+
+                            });
+                        }
 
                     }
                     return GeoList;
@@ -194,20 +196,36 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 foreach (var item in AllGeo2)
                 {
                     var Result = ToMessage(item);
-                    GeoList2.Add(new Return
-                    {
-                        Latitude = Result.Latitude,
-                        Longitude = Result.Longitude,
-                        Message = Result.Message
 
-                    });
+                    if (Result.Message.Body == null)
+                    {
+                        Result.Message.Body = item.Message;
+                        GeoList2.Add(new Return
+                        {
+                            Latitude = Result.Latitude,
+                            Longitude = Result.Longitude,
+                            Message = Result.Message
+
+                        });
+                    }
+
+                    else
+                    {
+                        GeoList2.Add(new Return
+                        {
+                            Latitude = Result.Latitude,
+                            Longitude = Result.Longitude,
+                            Message = Result.Message
+
+                        });
+                    }
                 }
                 return GeoList2;
             }
 
             [Authorize]
             [HttpPost]
-            public async Task<ActionResult<Return>> PostGeoMessage(Return geoPost/*, UserManager<MyUser> userManager*/)
+            public async Task<ActionResult<ReturnNoAuthor>> PostGeoMessage(ReturnNoAuthor geoPost/*, UserManager<MyUser> userManager*/)
             {
 
                 //var user = await _context.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefaultAsync();
@@ -222,8 +240,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                        id = RequestContext.Principal.Identity.GetUserId(); */
 
                 var userName = User.Identity.Name;
-                
-   
 
                 _context.GeoMessage.Add(new Models.V2.GeoMessage {
                     Author = userName,
@@ -253,6 +269,26 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 public string Body { get; set; }
                 public string Author { get; set; }
             }
+
+
+
+
+            public class ReturnNoAuthor
+            {
+                public MessageNoAuthor Message { get; set; }
+                public double Longitude { get; set; }
+                public double Latitude { get; set; }
+            }
+
+            public class MessageNoAuthor
+            {
+                public string Title { get; set; }
+                public string Body { get; set; }
+               // public string Author { get; set; }
+            }
+
+
+
 
 
 
