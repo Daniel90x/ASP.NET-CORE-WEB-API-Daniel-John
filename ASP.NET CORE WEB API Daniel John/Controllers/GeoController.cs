@@ -220,8 +220,11 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             [HttpGet]
             [SwaggerOperation(
                 Summary = "Lägg in parametrar för mer noggrann sökning.",
-                Description = "Här i Geo-coments V2, så kan man lägga in 4 olika parametrar som bestämmer hur noggrann din sökning är. " +
-                "Om någon parameter saknas så tar den hela listan istället. "
+                Description = ("Här i Geo-coments så kan man lägga in 4 olika parametrar som bestämmer hur noggrann din sökning är. " +
+                "Vad de olika parametrarna gör: \n" +
+                "MinLongitude = Minsta Longitude, MinLatitude = minsta Latitude, MaxLongitude = högsta Longitude och MaxLatitude = högsta Latitude. " +
+                "Om någon parameter saknas så tar den hela listan istället. ")
+
 
                 )]
             [SwaggerResponse(200,Description = "Tjohej! Nu har du fått din lösning!")]
