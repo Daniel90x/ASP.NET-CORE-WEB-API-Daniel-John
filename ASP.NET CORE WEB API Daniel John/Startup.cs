@@ -62,7 +62,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
             });
 
             services.AddDefaultIdentity<MyUser>()
-                // .AddRoles<IdentityRole>()    Kanske senare?
                 .AddEntityFrameworkStores<GeoDbContext>();
 
             services.AddAuthentication("BasicAuthentication")

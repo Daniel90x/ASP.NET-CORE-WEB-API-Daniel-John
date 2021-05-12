@@ -19,10 +19,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
         {
         }
 
-       /*  protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<GeoMessage>().Ignore(g => g.Message);
-        } */
 
         public DbSet<MyUser> User { get; set; }
         public DbSet<GeoMessage> GeoMessage { get; set; }

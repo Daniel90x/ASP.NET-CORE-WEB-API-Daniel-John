@@ -33,14 +33,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
         }
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            //return AuthenticateResult.Fail("Not allowed");
-          /*  var user = await _userManager.FindByNameAsync(username);
-
-            var claims = new List<Claim> {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName),
-            }; */
-
+            
 
             MyUser user;
             string password;
@@ -69,7 +62,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John
 
             var claims = new List<Claim> {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),         // WiP 
+                new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),     
                 };
 
 

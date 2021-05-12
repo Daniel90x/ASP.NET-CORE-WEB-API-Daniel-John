@@ -45,7 +45,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
                     var geoV1 = new Models.V1.GeoMessageDTO
                     {
-                        Message = test.Body,         // maybe
+                        Message = test.Body,         
                         Longitude = test.Longitude,
                         Latitude = test.Latitude
 
@@ -58,7 +58,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
                     var geoV1 = new Models.V1.GeoMessageDTO
                     {
-                        Message = test.Message,         // maybe
+                        Message = test.Message,         
                         Longitude = test.Longitude,
                         Latitude = test.Latitude
 
@@ -109,7 +109,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
                 var geoV1 = new Models.V1.GeoMessage
                 {
-                    Message = geoV2.Message,          // maybe
+                    Message = geoV2.Message,          
                     Longitude = geoV2.Longitude,
                     Latitude = geoV2.Latitude
 
@@ -120,7 +120,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
                 var geoV2 = new Models.V2.GeoMessage
                 {
-                    Message = geoV1.Message,         // Maybe?
+                    Message = geoV1.Message,         
                     Longitude = geoV1.Longitude,
                     Latitude = geoV1.Latitude
 
@@ -137,7 +137,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 var geoV2 = V1GeoMessageDTOToV2(geoPost);
 
 
-                _context.GeoMessage.Add(geoV2); // WiP 
+                _context.GeoMessage.Add(geoV2); 
                 await _context.SaveChangesAsync();
                 return Ok();
 
@@ -295,16 +295,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             public async Task<ActionResult<ReturnNoAuthor>> PostGeoMessage(ReturnNoAuthor geoPost/*, UserManager<MyUser> userManager*/)
             {
 
-                //var user = await _context.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefaultAsync();
-                // MyUser = user;
-
-                //var userId = User.Claims.FirstOrDefault(c => c.Type  == ClaimTypes.Name).Value;
-                //var user = await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
-
-
-                /*       string id;
-                       id = User.Identity.GetUserId();
-                       id = RequestContext.Principal.Identity.GetUserId(); */
 
                 var userName = User.Identity.Name;
 
@@ -351,11 +341,8 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             {
                 public string Title { get; set; }
                 public string Body { get; set; }
-               // public string Author { get; set; }
+               
             }
-
-
-
 
 
 
@@ -380,11 +367,6 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
 
         }
-
-
-
-
-
 
 
     }
