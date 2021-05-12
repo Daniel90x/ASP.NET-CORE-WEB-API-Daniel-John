@@ -71,9 +71,40 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             [HttpGet]
             public async Task<ActionResult<IEnumerable<Models.V1.GeoMessageDTO>>> GetGeoAll()
             {
-                return await _context.GeoMessage.Select(g => V2GeoMessageDTOToV1(g.ToDto())).ToListAsync();
+              //  if(test.message == null)   
+                var AllGeo = await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
+                var GeoList = new List<Models.V1.GeoMessageDTO>();
+
+                foreach (var item in AllGeo)
+                {
+                    //var Result = ToMessage(item);
+                    var AllGeoV1 = V2GeoMessageDTOToV1(item);
+                    if (item.Message == null)
+                    {
+                        GeoList.Add(new Models.V1.GeoMessageDTO
+                        {
+                            Latitude = AllGeoV1.Latitude,
+                            Longitude = AllGeoV1.Longitude,
+                            Message = item.Body
+
+                        });
+                    }
+
+                    else
+                    {
+                        GeoList.Add(new Models.V1.GeoMessageDTO
+                        {
+                            Latitude = AllGeoV1.Latitude,
+                            Longitude = AllGeoV1.Longitude,
+                            Message = AllGeoV1.Message
+
+                        });
+                    }
+                }
+                return GeoList;
             }
 
+           
             public static Models.V1.GeoMessageDTO V2GeoMessageDTOToV1(Models.V2.GeoMessageDTO geoV2)
             {
                 var geoV1 = new Models.V1.GeoMessage
