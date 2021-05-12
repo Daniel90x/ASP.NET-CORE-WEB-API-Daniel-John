@@ -39,21 +39,38 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 {
                     return NotFound();
                 }
-                var geoV1 = new Models.V1.GeoMessageDTO {
-                    Message = test.Message,         // maybe
-                    Longitude = test.Longitude,
-                    Latitude = test.Latitude
-                    
-                };
-                return geoV1;
+
+                if (test.Message == null)
+                {
+
+                    var geoV1 = new Models.V1.GeoMessageDTO
+                    {
+                        Message = test.Body,         // maybe
+                        Longitude = test.Longitude,
+                        Latitude = test.Latitude
+
+                    };
+
+                    return geoV1;
+                }
+                else
+                 {
+
+                    var geoV1 = new Models.V1.GeoMessageDTO
+                    {
+                        Message = test.Message,         // maybe
+                        Longitude = test.Longitude,
+                        Latitude = test.Latitude
+
+                    };
+                    return geoV1;
+                }
             }
 
 
             [HttpGet]
             public async Task<ActionResult<IEnumerable<Models.V1.GeoMessageDTO>>> GetGeoAll()
             {
-
-                
                 return await _context.GeoMessage.Select(g => V2GeoMessageDTOToV1(g.ToDto())).ToListAsync();
             }
 
@@ -130,19 +147,38 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                     return NotFound();
                 }
 
-                var message = new Message
+                if (test.Body == null)
                 {
-                    Title = test.Title,
-                    Body = test.Body,
-                    Author = test.Author
-                };
+                    var message = new Message
+                    {
+                        Title = test.Title,
+                        Body = test.Message,
+                        Author = test.Author
+                    };
 
-                return new Return
+                    return new Return
+                    {
+                        Message = message,
+                        Latitude = test.Latitude,
+                        Longitude = test.Longitude,
+                    };
+                }
+                else
                 {
-                    Message = message,
-                    Latitude = test.Latitude,
-                    Longitude = test.Longitude,
-                };
+                    var message = new Message
+                    {
+                        Title = test.Title,
+                        Body = test.Body,
+                        Author = test.Author
+                    };
+
+                    return new Return
+                    {
+                        Message = message,
+                        Latitude = test.Latitude,
+                        Longitude = test.Longitude,
+                    };
+                }
 
             }
             
