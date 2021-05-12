@@ -75,13 +75,11 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
             [HttpGet]
             public async Task<ActionResult<IEnumerable<Models.V1.GeoMessageDTO>>> GetGeoAll()
             {
-              //  if(test.message == null)   
                 var AllGeo = await _context.GeoMessage.Select(g => g.ToDto()).ToListAsync();
                 var GeoList = new List<Models.V1.GeoMessageDTO>();
 
                 foreach (var item in AllGeo)
                 {
-                    //var Result = ToMessage(item);
                     var AllGeoV1 = V2GeoMessageDTOToV1(item);
                     if (item.Message == null)
                     {
@@ -303,7 +301,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
 
             [Authorize]
             [HttpPost]
-            public async Task<ActionResult<ReturnNoAuthor>> PostGeoMessage(ReturnNoAuthor geoPost/*, UserManager<MyUser> userManager*/)
+            public async Task<ActionResult<ReturnNoAuthor>> PostGeoMessage(ReturnNoAuthor geoPost)
             {
 
 
@@ -374,11 +372,7 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 };
             }
 
-
-
-
         }
-
 
     }
 }

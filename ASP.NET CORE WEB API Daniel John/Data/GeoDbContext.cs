@@ -12,7 +12,7 @@ using ASP.NET_CORE_WEB_API_Daniel_John.Models.V2;
 
 namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
 {
-    public class GeoDbContext : /* DbContext */ IdentityDbContext<MyUser> 
+    public class GeoDbContext : IdentityDbContext<MyUser> 
     {
         public GeoDbContext(DbContextOptions<GeoDbContext> options)
             : base(options)
@@ -49,11 +49,8 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Data
                 "Tester_123"); 
 
 
-
             await SaveChangesAsync();
         }
-
-
 
 
     }
