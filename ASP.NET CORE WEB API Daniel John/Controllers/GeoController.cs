@@ -220,20 +220,19 @@ namespace ASP.NET_CORE_WEB_API_Daniel_John.Controllers
                 /*       string id;
                        id = User.Identity.GetUserId();
                        id = RequestContext.Principal.Identity.GetUserId(); */
-                var test = User.Identity.Name;
-                var claim = User.FindFirst(ClaimTypes.NameIdentifier);
 
-
-
+                var userName = User.Identity.Name;
+                
+   
 
                 _context.GeoMessage.Add(new Models.V2.GeoMessage {
-                    Author = test,
-                    Title = geoPost.Message.Title,
+                    Author = userName,
+                    Title = geoPost.Message.Title,          // fyll body med message och tvärtom
                     Body = geoPost.Message.Body,
                     Latitude = geoPost.Latitude,
                     Longitude = geoPost.Longitude
 
-                });
+                }); 
                 await _context.SaveChangesAsync();
 
                 return Ok();
